@@ -1,7 +1,8 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 import React, { useState, useEffect } from "react";
-
+import LineChart from "@/Components/LineChart";
+import AddedDeviceChart from "@/Components/AddedDeviceChart";
 export default function Dashboard({ auth }) {
     return (
         <AuthenticatedLayout
@@ -23,16 +24,30 @@ export default function Dashboard({ auth }) {
                     </div>
                     <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[2em]">
                         <div className="flex flex-col items-center justify-center p-4 bg-[#ff7c54] rounded shadow">
-                            <div className="text-2xl font-bold text-[#fff]">256</div>
+                            <div className="text-2xl font-bold text-[#fff]">
+                                256
+                            </div>
                             <div className="text-[#fff]">Current Users</div>
                         </div>
                         <div className="flex flex-col items-center justify-center p-4 bg-[#ff9c54] rounded shadow">
-                            <div className="text-2xl font-bold text-[#fff]">256</div>
+                            <div className="text-2xl font-bold text-[#fff]">
+                                256
+                            </div>
                             <div className="text-[#fff]">Total Defective</div>
                         </div>
                         <div className="flex flex-col items-center justify-center p-4 bg-[#b0a484] rounded shadow">
-                            <div className="text-2xl font-bold text-[#fff]">256</div>
+                            <div className="text-2xl font-bold text-[#fff]">
+                                256
+                            </div>
                             <div className="text-[#fff]">Total Device</div>
+                        </div>
+                    </div>
+                    <div className="flex gap-2">
+                        <div className="mt-8 p-4 bg-white shadow-sm sm:rounded-lg w-1/2">
+                            <LineChart />
+                        </div>
+                        <div className="mt-8 p-4 bg-white shadow-sm sm:rounded-lg w-1/2">
+                            <AddedDeviceChart />
                         </div>
                     </div>
                 </div>
