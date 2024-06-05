@@ -79,10 +79,14 @@ export default function ManageUser({ auth }) {
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap flex gap-2">
-                                                <EditButton>
-                                                </EditButton>
-                                                <DeleteButton>
-                                                </DeleteButton>
+                                                <EditButton
+                                                    href={route(
+                                                        "manageUser.edit",
+                                                        user.id
+                                                    )}
+                                                ></EditButton>
+
+                                                <DeleteButton></DeleteButton>
                                             </td>
                                         </tr>
                                     ))

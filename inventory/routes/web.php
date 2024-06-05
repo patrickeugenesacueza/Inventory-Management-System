@@ -29,6 +29,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/manage/create', [ManageUserController::class, 'create'])->name('manageUser.create');
     Route::post('/manage/create_process', [ManageUserController::class, 'create_process'])->name('manageUser.create_process');
 
+    Route::get('/manage/edit/{user}', [ManageUserController::class, 'edit'])->name('manageUser.edit');
+
+
 });
 
 require __DIR__.'/auth.php';

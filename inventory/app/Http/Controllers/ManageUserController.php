@@ -32,4 +32,9 @@ class ManageUserController extends Controller
         User::create($data);
         return redirect(route('manageUser.index'));
     }
+
+    public function edit(User $user){
+        return Inertia::render('Manage/Edit', ['user' => $user]);
+    }
+    
 }
