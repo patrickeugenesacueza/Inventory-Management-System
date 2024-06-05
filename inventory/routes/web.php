@@ -19,16 +19,19 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/manage', function () {
-    return Inertia::render('Manage/Index');
-})->middleware(['auth', 'verified'])->name('manage');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Route::get('/manage', [ManageUserController::class, 'index'])->name('manage.index');
+    Route::get('/manage', [ManageUserController::class, 'index'])->name('manageUser.index');
+    Route::get('/manage/create', [ManageUserController::class, 'create'])->name('manageUser.create');
+    Route::post('/manage/create_process', [ManageUserController::class, 'create_process'])->name('manageUser.create_process');
+
+    Route::get('/manage/edit/{user}', [ManageUserController::class, 'edit'])->name('manageUser.edit');
+
+
 });
 
 require __DIR__.'/auth.php';
