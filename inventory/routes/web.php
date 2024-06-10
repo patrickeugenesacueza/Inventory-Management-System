@@ -30,8 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/manage/create_process', [ManageUserController::class, 'create_process'])->name('manageUser.create_process');
 
     Route::get('/manage/edit/{user}', [ManageUserController::class, 'edit'])->name('manageUser.edit');
-
-
+    Route::put('/manage/edit_process/{user}', [ManageUserController::class, 'edit_process'])->name('manageUser.edit_process');
+    
+    Route::delete('/manage/delete_process/{user}', [ManageUserController::class, 'delete_process'])->name('manageUser.delete_process');
 });
 
 require __DIR__.'/auth.php';
