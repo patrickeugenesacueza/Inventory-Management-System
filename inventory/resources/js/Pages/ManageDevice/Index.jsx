@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm } from "@inertiajs/react";
 import { useState } from "react";
-
+import AddUserButton from "@/Components/AddUserButton";
 const Index = ({ auth }) => {
     // const { deviceList } = usePage().props;
     return (
@@ -19,6 +19,7 @@ const Index = ({ auth }) => {
                     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div className="px-5 py-5 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             {/* <AddUserButton href={route("manageUser.create")} /> */}
+                            <AddUserButton>Add Device</AddUserButton>
                             <table className="min-w-full mt-6 divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
