@@ -1,30 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { usePage } from "@inertiajs/react";
+import { usePage, useForm } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
 
 const Edit = () => {
-    const { auth, errors, user } = usePage().props; // Fetch user data from props
-    const [data, setData] = useState({
-        name: "",
-        email: "",
+    const { auth, errors, user } = usePage().props;
+    const { data, setData, put, processing } = useForm({
+        name: user.name || "",
+        email: user.email || "",
+    });
+
+    const [passwords, setPasswords] = useState({
         password: "*******",
         repassword: "*******",
     });
 
-    useEffect(() => {
-        // Initialize the state with the fetched user data
-        if (user) {
-            setData({
-                name: user.name,
-                email: user.email,
-            });
-        }
-    }, [user]);
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Submit logic here
+        put(route('manageUser.edit_process', { user: user.id }), {
+            data,
+            onSuccess: () => {
+                setPasswords({
+                    password: "*******",
+                    repassword: "*******",
+                });
+            },
+        });
     };
 
     return (
@@ -62,7 +63,7 @@ const Edit = () => {
                                     id="name"
                                     value={data.name}
                                     onChange={(e) =>
-                                        setData({ ...data, name: e.target.value })
+                                        setData("name", e.target.value)
                                     }
                                     required
                                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -82,7 +83,7 @@ const Edit = () => {
                                     id="email"
                                     value={data.email}
                                     onChange={(e) =>
-                                        setData({ ...data, email: e.target.value })
+                                        setData("email", e.target.value)
                                     }
                                     required
                                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -100,12 +101,14 @@ const Edit = () => {
                                     type="password"
                                     name="password"
                                     id="password"
-                                    value={data.password}
+                                    value={passwords.password}
                                     onChange={(e) =>
-                                        setData({ ...data, password: e.target.value })
+                                        setPasswords({
+                                            ...passwords,
+                                            password: e.target.value,
+                                        })
                                     }
                                     required
-                                    readOnly
                                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             </div>
@@ -121,12 +124,14 @@ const Edit = () => {
                                     type="password"
                                     name="repassword"
                                     id="repassword"
-                                    value={data.repassword}
+                                    value={passwords.repassword}
                                     onChange={(e) =>
-                                        setData({ ...data, repassword: e.target.value })
+                                        setPasswords({
+                                            ...passwords,
+                                            repassword: e.target.value,
+                                        })
                                     }
                                     required
-                                    readOnly
                                     className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 />
                             </div>
@@ -135,6 +140,7 @@ const Edit = () => {
                                 <button
                                     type="submit"
                                     className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    disabled={processing}
                                 >
                                     Update User
                                 </button>

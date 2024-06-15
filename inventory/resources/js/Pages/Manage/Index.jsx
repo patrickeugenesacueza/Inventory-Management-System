@@ -1,6 +1,5 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, usePage } from "@inertiajs/react";
-import SuccessButton from "@/Components/SuccessButton";
 import AddUserButton from "@/Components/AddUserButton";
 import EditButton from "@/Components/EditButton";
 import DeleteButton from "@/Components/DeleteButton";
@@ -73,9 +72,7 @@ export default function ManageUser({ auth }) {
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="text-sm text-gray-500">
-                                                    {formatDate(
-                                                        user.created_at
-                                                    )}
+                                                    {formatDate(user.created_at)}
                                                 </div>
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap flex gap-2">
@@ -86,7 +83,7 @@ export default function ManageUser({ auth }) {
                                                     )}
                                                 ></EditButton>
 
-                                                <DeleteButton></DeleteButton>
+                                                <DeleteButton userId={user.id} />
                                             </td>
                                         </tr>
                                     ))
