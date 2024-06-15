@@ -26,7 +26,7 @@ export default function ManageUser({ auth }) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="px-5 py-5 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                        <AddUserButton href={route("manageUser.create")} />
+                        <AddUserButton href={route("manageUser.create")} >Add User</AddUserButton>
                         <table className="min-w-full mt-6 divide-y divide-gray-200">
                             <thead className="bg-gray-50">
                                 <tr>
