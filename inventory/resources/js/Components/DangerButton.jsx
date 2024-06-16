@@ -1,15 +1,17 @@
-export default function DangerButton({ className = '', disabled, children, ...props }) {
+import React from "react";
+import { Link } from "@inertiajs/react";
+import { FaTrashRestoreAlt  } from "react-icons/fa";
+
+const DangerButton = ({ href, children }) => {
     return (
-        <button
-            {...props}
-            className={
-                `inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition ease-in-out duration-150 ${
-                    disabled && 'opacity-25'
-                } ` + className
-            }
-            disabled={disabled}
+        <Link
+            href={href}
+            className="bg-[#ffcccc] border border-green-900 border-dashed px-4 py-2 flex rounded w-auto"
         >
+            <FaTrashRestoreAlt className="mr-2" />
             {children}
-        </button>
+        </Link>
     );
-}
+};
+
+export default DangerButton;
