@@ -36,6 +36,9 @@ Route::middleware('auth')->group(function () {
 
     //Manage Device Route
     Route::get('/manageDevice', [ManageDeviceController::class, 'index'])->name('manageDevice.index');
+    Route::get('/manageDevice/AddDevice', [ManageDeviceController::class, 'createDevice'])->name('manageDevice.createDevice');
+    Route::post('/manageDevice/AddDevice_process', [ManageDeviceController::class, 'createDeviceProcess'])->name('manageDevice.createDeviceProcess');
+
 });
 
 require __DIR__.'/auth.php';
