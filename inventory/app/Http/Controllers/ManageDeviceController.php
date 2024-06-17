@@ -10,16 +10,19 @@ class ManageDeviceController extends Controller
 {
     //
 
-    public function index(){
+    public function index()
+    {
         $itemList = DeviceModel::all();
         return Inertia::render('ManageDevice/Index', ['itemList' => $itemList]);
     }
 
-    public function createDevice(){
+    public function createDevice()
+    {
         return Inertia::render('ManageDevice/CreateDevice');
     }
 
-    public function createDeviceProcess(Request $request){
+    public function createDeviceProcess(Request $request)
+    {
         $data = $request->validate([
             'category' => 'required',
             'product' => 'required',
@@ -31,4 +34,25 @@ class ManageDeviceController extends Controller
         DeviceModel::create($data);
         return redirect(route('manageDevice.index'));
     }
+
+    public function edit(DeviceModel $device)
+    {
+        return Inertia::render('ManageDevice/Edit', ['device' => $device]);
+    }
+
+    public function update(Request $request, DeviceModel $device)
+{
+    $data = $request->validate([
+        'category' => 'required',
+        'product' => 'required',
+        'sn' => 'required',
+        'price' => 'required|numeric',
+        'personnel' => 'required'
+    ]);
+
+    $device->update($data);
+    return redirect(route('manageDevice.index'));
+}
+
+
 }
