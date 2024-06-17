@@ -1,9 +1,11 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import { Head, useForm } from "@inertiajs/react";
-import { useState } from "react";
+import { Head, usePage } from "@inertiajs/react";
 import AddUserButton from "@/Components/AddUserButton";
+import DangerButton from "@/Components/DangerButton";
+
 const Index = ({ auth }) => {
-    // const { deviceList } = usePage().props;
+    const { itemList } = usePage().props; // Adjusted to "devices" based on your backend response
+
     return (
         <>
             <AuthenticatedLayout
@@ -18,8 +20,12 @@ const Index = ({ auth }) => {
                 <div className="py-12">
                     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div className="px-5 py-5 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                            {/* <AddUserButton href={route("manageUser.create")} /> */}
-                            <AddUserButton>Add Device</AddUserButton>
+                            <div className="flex gap-4">
+                                <AddUserButton href={route("manageDevice.createDevice")}>
+                                    Add Device
+                                </AddUserButton>
+                                <DangerButton>View Defective</DangerButton>
+                            </div>
                             <table className="min-w-full mt-6 divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
@@ -68,51 +74,54 @@ const Index = ({ auth }) => {
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {/* {userList.length > 0 ? (
-                                        userList.map((user) => ( */}
-                                    {/* <tr key={user.id}> */}
-                                    <tr>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="text-sm font-medium text-gray-900">
-                                                {/* {user.name} */}
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="text-sm text-gray-500">
-                                                {/* {user.email} */}
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap">
-                                            <div className="text-sm text-gray-500">
-                                                {/* {formatDate(
-                                                            user.created_at
-                                                        )} */}
-                                            </div>
-                                        </td>
-                                        <td className="px-6 py-4 whitespace-nowrap flex gap-2">
-                                            {/* <EditButton
-                                                        href={route(
-                                                            "manageUser.edit",
-                                                            user.id
-                                                        )}
-                                                    ></EditButton> */}
-                                            {/* 
-                                                    <DeleteButton
-                                                        userId={user.id}
-                                                    /> */}
-                                        </td>
-                                    </tr>
-                                    {/* ))
+                                    {itemList.length > 0 ? (
+                                        itemList.map((itemList) => (
+                                            <tr key={itemList.id}>
+                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                    <div className="text-sm font-medium text-gray-900">
+                                                        {itemList.id}
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                    <div className="text-sm text-gray-500">
+                                                        {itemList.category}
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                    <div className="text-sm text-gray-500">
+                                                        {itemList.product}
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                    <div className="text-sm text-gray-500">
+                                                        {itemList.sn}
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                    <div className="text-sm text-gray-500">
+                                                        {itemList.price}
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                    <div className="text-sm text-gray-500">
+                                                        {itemList.personnel}
+                                                    </div>
+                                                </td>
+                                                <td className="px-6 py-4 whitespace-nowrap flex gap-2">
+                                                    {/* Add action buttons here */}
+                                                </td>
+                                            </tr>
+                                        ))
                                     ) : (
                                         <tr>
                                             <td
-                                                colSpan="4"
+                                                colSpan="7"
                                                 className="px-6 py-4 text-center text-sm text-gray-500"
                                             >
-                                                No users found.
+                                                No devices found.
                                             </td>
                                         </tr>
-                                    )} */}
+                                    )}
                                 </tbody>
                             </table>
                         </div>
