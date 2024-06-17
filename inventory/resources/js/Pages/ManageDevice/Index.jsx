@@ -2,7 +2,9 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, usePage } from "@inertiajs/react";
 import AddUserButton from "@/Components/AddUserButton";
 import DangerButton from "@/Components/DangerButton";
-
+import EditButton from "@/Components/EditButton";
+import DeleteButton from "@/Components/DeleteButton";
+import DefectiveButton from "@/Components/DefectiveButton";
 const Index = ({ auth }) => {
     const { itemList } = usePage().props; // Adjusted to "devices" based on your backend response
 
@@ -21,7 +23,9 @@ const Index = ({ auth }) => {
                     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div className="px-5 py-5 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="flex gap-4">
-                                <AddUserButton href={route("manageDevice.createDevice")}>
+                                <AddUserButton
+                                    href={route("manageDevice.createDevice")}
+                                >
                                     Add Device
                                 </AddUserButton>
                                 <DangerButton>View Defective</DangerButton>
@@ -109,6 +113,16 @@ const Index = ({ auth }) => {
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap flex gap-2">
                                                     {/* Add action buttons here */}
+                                                    <EditButton
+                                                        href={route(
+                                                            "manageDevice.edit",
+                                                            {
+                                                                device: itemList.id,
+                                                            }
+                                                        )}
+                                                    />
+
+                                                    <DefectiveButton />
                                                 </td>
                                             </tr>
                                         ))

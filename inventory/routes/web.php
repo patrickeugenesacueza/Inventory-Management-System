@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/manageDevice', [ManageDeviceController::class, 'index'])->name('manageDevice.index');
     Route::get('/manageDevice/AddDevice', [ManageDeviceController::class, 'createDevice'])->name('manageDevice.createDevice');
     Route::post('/manageDevice/AddDevice_process', [ManageDeviceController::class, 'createDeviceProcess'])->name('manageDevice.createDeviceProcess');
+    Route::get('/manageDevice/edit/{device}', [ManageDeviceController::class, 'edit'])->name('manageDevice.edit');
+    Route::put('/manageDevice/update/{device}', [ManageDeviceController::class, 'update'])->name('manageDevice.update');
+
 
 });
 
