@@ -40,7 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/manageDevice/AddDevice_process', [ManageDeviceController::class, 'createDeviceProcess'])->name('manageDevice.createDeviceProcess');
     Route::get('/manageDevice/edit/{device}', [ManageDeviceController::class, 'edit'])->name('manageDevice.edit');
     Route::put('/manageDevice/update/{device}', [ManageDeviceController::class, 'update'])->name('manageDevice.update');
+    Route::post('/manageDevice/moveToDefective/{device}', [ManageDeviceController::class, 'moveToDefective'])->name('manageDevice.moveToDefective');
 
+    Route::get('/manageDevice/Defective', [ManageDeviceController::class, 'DefectivePage'])->name('manageDevice.defectivePage');
 
 });
 

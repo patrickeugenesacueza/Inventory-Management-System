@@ -60,7 +60,7 @@ export default function Authenticated({ user, header, children }) {
                             <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink
                                     href={route("manageDevice.index")}
-                                    active={route().current("manageDevice.index")}
+                                    active={route().current("manageDevice.index") || route().current("manageDevice.createDevice") || route().current("manageDevice.defectivePage")}
                                 >
                                     Manage Device
                                 </NavLink>
