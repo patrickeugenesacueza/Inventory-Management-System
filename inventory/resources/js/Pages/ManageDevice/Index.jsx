@@ -34,12 +34,12 @@ const Index = ({ auth }) => {
                             <table className="min-w-full mt-6 divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th
+                                        {/* <th
                                             scope="col"
                                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
                                             ID
-                                        </th>
+                                        </th> */}
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -82,11 +82,11 @@ const Index = ({ auth }) => {
                                     {itemList.length > 0 ? (
                                         itemList.map((item) => (
                                             <tr key={item.id}>
-                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                {/* <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="text-sm font-medium text-gray-900">
                                                         {item.id}
                                                     </div>
-                                                </td>
+                                                </td> */}
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="text-sm text-gray-500">
                                                         {item.category}

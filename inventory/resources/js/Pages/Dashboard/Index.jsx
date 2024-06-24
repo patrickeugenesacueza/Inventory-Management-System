@@ -1,17 +1,16 @@
 // Dashboard.jsx
 
 import React from 'react';
-import { usePage } from '@inertiajs/inertia-react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, usePage} from '@inertiajs/react';
 import CurrentUser from '@/Components/CurrentUser';
 import TotalDevice from '@/Components/TotalDevice';
 import LineChart from '@/Components/LineChart';
 import AddedDeviceChart from '@/Components/AddedDeviceChart';
 
 const Dashboard = ({ auth }) => {
-    // const { defectiveCount } = usePage().props;
-
+    const { defectiveCount } = usePage().props;
+    console.log(defectiveCount);
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -30,23 +29,23 @@ const Dashboard = ({ auth }) => {
                         </div>
                     </div>
                     <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-[2em]">
-                        <CurrentUser />
+                        {/* <CurrentUser /> */}
                         <div className="flex flex-col items-center justify-center p-4 bg-[#ff9c54] rounded shadow">
                             <div className="text-2xl font-bold text-[#fff]">
-                                defe
+                                {defectiveCount}
                             </div>
                             <div className="text-[#fff]">Total Defective</div>
                         </div>
-                        <TotalDevice />
+                        {/* <TotalDevice /> */}
                     </div>
-                    <div className="flex gap-2">
+                    {/* <div className="flex gap-2">
                         <div className="mt-8 p-4 bg-white shadow-sm sm:rounded-lg w-1/2">
                             <LineChart />
                         </div>
                         <div className="mt-8 p-4 bg-white shadow-sm sm:rounded-lg w-1/2">
                             <AddedDeviceChart />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </AuthenticatedLayout>
