@@ -85,4 +85,25 @@ class ManageDeviceController extends Controller
         $itemList = DefectiveModel::all();
         return Inertia::render('ManageDevice/Defective', ['itemList' => $itemList]);
     }
+
+    public function redoFromDefective($id)
+    {
+        // Find the defective item by ID
+        $defectiveItem = DefectiveModel::findOrFail($id);
+
+        // Create a new device record with the data from the defective item
+        DeviceModel::create([
+            'category' => $defectiveItem->category,
+            'product' => $defectiveItem->product,
+            'sn' => $defectiveItem->sn,
+            'price' => $defectiveItem->price,
+            'personnel' => $defectiveItem->personnel,
+        ]);
+
+        // Delete the defective item
+        $defectiveItem->delete();
+
+        // Redirect back to the defective items page with a success message
+        return redirect()->route('manageDevice.defectivePage')->with('success', 'Device has been moved back to the devices table.');
+    }
 }

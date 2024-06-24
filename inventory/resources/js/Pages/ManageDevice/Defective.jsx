@@ -1,21 +1,18 @@
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, usePage } from "@inertiajs/react";
-import AddUserButton from "@/Components/AddUserButton";
-import DangerButton from "@/Components/DangerButton";
-import EditButton from "@/Components/EditButton";
-import DefectiveButton from "@/Components/DefectiveButton";
-import { Inertia } from "@inertiajs/inertia";
 import RedoButton from "@/Components/RedoButton";
+
 const Defective = ({ auth }) => {
     const { itemList } = usePage().props;
+
     return (
         <>
             <AuthenticatedLayout
                 user={auth.user}
                 header={
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Manage Device - View Defective
+                        <a  className="underline" href={route('manageDevice.index')}>Manage Device</a> {">"} View Defective
                     </h2>
                 }
             >
@@ -23,16 +20,15 @@ const Defective = ({ auth }) => {
                 <div className="py-12">
                     <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                         <div className="px-5 py-5 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
                             <table className="min-w-full mt-6 divide-y divide-gray-200">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th
+                                        {/* <th
                                             scope="col"
                                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                                         >
                                             ID
-                                        </th>
+                                        </th> */}
                                         <th
                                             scope="col"
                                             className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
@@ -75,11 +71,11 @@ const Defective = ({ auth }) => {
                                     {itemList.length > 0 ? (
                                         itemList.map((item) => (
                                             <tr key={item.id}>
-                                                <td className="px-6 py-4 whitespace-nowrap">
+                                                {/* <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="text-sm font-medium text-gray-900">
                                                         {item.id}
                                                     </div>
-                                                </td>
+                                                </td> */}
                                                 <td className="px-6 py-4 whitespace-nowrap">
                                                     <div className="text-sm text-gray-500">
                                                         {item.category}
@@ -106,14 +102,7 @@ const Defective = ({ auth }) => {
                                                     </div>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap flex gap-2">
-                                                    <RedoButton
-                                                        // href={route(
-                                                        //     "manageDevice.edit",
-                                                        //     {
-                                                        //         device: item.id,
-                                                        //     }
-                                                        // )}
-                                                    />
+                                                    <RedoButton id={item.id} />
                                                 </td>
                                             </tr>
                                         ))

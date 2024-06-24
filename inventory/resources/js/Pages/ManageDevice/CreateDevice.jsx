@@ -22,7 +22,7 @@ const CreateDevice = ({ auth }) => {
                 user={auth.user}
                 header={
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Manage Device - Add Device
+                         <a  className="underline" href={route('manageDevice.index')}>Manage Device</a> {">"} Add Device
                     </h2>
                 }
             >
