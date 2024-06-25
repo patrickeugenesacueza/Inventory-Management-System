@@ -8,6 +8,7 @@ import CurrentUser from '@/Components/CurrentUser';
 import TotalDevice from '@/Components/TotalDevice';
 import LineChart from '@/Components/LineChart';
 import AddedDeviceChart from '@/Components/AddedDeviceChart';
+import NewDashboard from './Dashboard';
 
 const Dashboard = ({ auth }) => {
     // const { defectiveCount } = usePage().props;
@@ -23,7 +24,8 @@ const Dashboard = ({ auth }) => {
         >
             <Head title="Dashboard" />
             <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                {/* <NewDashboard/> */}
+                {/* <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="flex">
                         <div className="w-1/2 p-6 text-black-900 bg-[#e0ecdc] overflow-hidden shadow-sm sm:rounded-lg">
                             Welcome to Inventory Management System
@@ -47,7 +49,7 @@ const Dashboard = ({ auth }) => {
                             <AddedDeviceChart />
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </AuthenticatedLayout>
     );
