@@ -8,19 +8,19 @@ import TotalDevice from '@/Components/TotalDevice';
 import LineChart from '@/Components/LineChart';
 import AddedDeviceChart from '@/Components/AddedDeviceChart';
 
-const Dashboard = ({ auth }) => {
+const NewDashboard = () => {
     const { defectiveCount } = usePage().props;
     console.log(defectiveCount);
     return (
-        <AuthenticatedLayout
-            user={auth.user}
-            header={
-                <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                    Dashboard
-                </h2>
-            }
-        >
-            <Head title="Dashboard" />
+        // <AuthenticatedLayout
+        //     user={auth.user}
+        //     header={
+        //         <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+        //             Dashboard
+        //         </h2>
+        //     }
+        // >
+            // <Head title="Dashboard" />
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="flex">
@@ -48,8 +48,8 @@ const Dashboard = ({ auth }) => {
                     </div> */}
                 </div>
             </div>
-        </AuthenticatedLayout>
+        // </AuthenticatedLayout>
     );
 };
 
-export default Dashboard;
+export default NewDashboard;
