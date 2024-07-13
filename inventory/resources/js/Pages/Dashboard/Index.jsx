@@ -9,7 +9,7 @@ import LineChart from "@/Components/LineChart";
 import AddedDeviceChart from "@/Components/AddedDeviceChart";
 
 const NewDashboard = ({ auth }) => {
-    const { defectiveCount, totalUserCount } = usePage().props;
+    const { defectiveCount, totalUserCount, deviceCount } = usePage().props;
 
     return (
         <AuthenticatedLayout
@@ -41,7 +41,12 @@ const NewDashboard = ({ auth }) => {
                             </div>
                             <div className="text-[#fff]">Total Defective</div>
                         </div>
-                        <TotalDevice />
+                        <div className="flex flex-col items-center justify-center p-4 bg-[#ff9c54] rounded shadow">
+                            <div className="text-2xl font-bold text-[#fff]">
+                                {deviceCount}
+                            </div>
+                            <div className="text-[#fff]">Total Defective</div>
+                        </div>
                     </div>
                     <div className="flex gap-2">
                         <div className="mt-8 p-4 bg-white shadow-sm sm:rounded-lg w-1/2">
