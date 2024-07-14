@@ -1,12 +1,6 @@
-// Dashboard.jsx
-
 import React from "react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, usePage } from "@inertiajs/react";
-import CurrentUser from "@/Components/CurrentUser";
-import TotalDevice from "@/Components/TotalDevice";
-import LineChart from "@/Components/LineChart";
-import AddedDeviceChart from "@/Components/AddedDeviceChart";
 import { Line } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -29,10 +23,12 @@ ChartJS.register(
     Legend
 );
 
-const NewDashboard = ({ auth, props }) => {
-    const { defectiveCount, totalUserCount, deviceCount, defectivePerMonth } =
-        usePage().props;
-    console.log(defectiveCount);
+const NewDashboard = ({ auth }) => {
+    const { defectiveCount, totalUserCount, deviceCount, defectivePerMonth, devicePerMonth } = usePage().props;
+
+    // Debug: Log data to the console
+    console.log('defectivePerMonth:', defectivePerMonth);
+    console.log('devicePerMonth:', devicePerMonth);
 
     const months = [
         "January",
@@ -50,11 +46,17 @@ const NewDashboard = ({ auth, props }) => {
     ];
 
     const defectiveData = Array(12).fill(0);
-    for (const [month, count] of Object.entries(defectivePerMonth)) {
+    const deviceData = Array(12).fill(0);
+
+    for (const [month, count] of Object.entries(devicePerMonth || {})) {
+        deviceData[month - 1] = count; // month is 1-indexed
+    }
+
+    for (const [month, count] of Object.entries(defectivePerMonth || {})) {
         defectiveData[month - 1] = count; // month is 1-indexed
     }
 
-    const chartData = {
+    const chartDataDefective = {
         labels: months,
         datasets: [
             {
@@ -67,6 +69,19 @@ const NewDashboard = ({ auth, props }) => {
         ],
     };
 
+    const chartDataDevice = {
+        labels: months,
+        datasets: [
+            {
+                label: "Device Count",
+                data: deviceData,
+                fill: false,
+                backgroundColor: "rgba(54, 162, 235, 1)",
+                borderColor: "rgba(54, 162, 235, 1)",
+            },
+        ],
+    };
+
     const chartOptions = {
         responsive: true,
         plugins: {
@@ -75,10 +90,11 @@ const NewDashboard = ({ auth, props }) => {
             },
             title: {
                 display: true,
-                text: "Defective Devices Per Month in 2024",
+                text: "Devices and Defective Devices Per Month in 2024",
             },
         },
     };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -119,13 +135,15 @@ const NewDashboard = ({ auth, props }) => {
                     <div className="flex gap-2">
                         <div className="mt-8 p-4 bg-white shadow-sm sm:rounded-lg w-1/2">
                             <Line
-                                data={chartData}
+                                data={chartDataDefective}
                                 options={chartOptions}
-                                className={props}
                             />
                         </div>
                         <div className="mt-8 p-4 bg-white shadow-sm sm:rounded-lg w-1/2">
-                            <AddedDeviceChart />
+                            <Line
+                                data={chartDataDevice}
+                                options={chartOptions}
+                            />
                         </div>
                     </div>
                 </div>
