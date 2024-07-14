@@ -7,10 +7,78 @@ import CurrentUser from "@/Components/CurrentUser";
 import TotalDevice from "@/Components/TotalDevice";
 import LineChart from "@/Components/LineChart";
 import AddedDeviceChart from "@/Components/AddedDeviceChart";
+import { Line } from "react-chartjs-2";
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from "chart.js";
 
-const NewDashboard = ({ auth }) => {
-    const { defectiveCount, totalUserCount, deviceCount } = usePage().props;
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
+const NewDashboard = ({ auth, props }) => {
+    const { defectiveCount, totalUserCount, deviceCount, defectivePerMonth } =
+        usePage().props;
+    console.log(defectiveCount);
+
+    const months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ];
+
+    const defectiveData = Array(12).fill(0);
+    for (const [month, count] of Object.entries(defectivePerMonth)) {
+        defectiveData[month - 1] = count; // month is 1-indexed
+    }
+
+    const chartData = {
+        labels: months,
+        datasets: [
+            {
+                label: "Defective Count",
+                data: defectiveData,
+                fill: false,
+                backgroundColor: "rgba(255,99,132,1)",
+                borderColor: "rgba(255,99,132,1)",
+            },
+        ],
+    };
+
+    const chartOptions = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: "top",
+            },
+            title: {
+                display: true,
+                text: "Defective Devices Per Month in 2024",
+            },
+        },
+    };
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -45,12 +113,16 @@ const NewDashboard = ({ auth }) => {
                             <div className="text-2xl font-bold text-[#fff]">
                                 {deviceCount}
                             </div>
-                            <div className="text-[#fff]">Total Defective</div>
+                            <div className="text-[#fff]">Total Device</div>
                         </div>
                     </div>
                     <div className="flex gap-2">
                         <div className="mt-8 p-4 bg-white shadow-sm sm:rounded-lg w-1/2">
-                            <LineChart />
+                            <Line
+                                data={chartData}
+                                options={chartOptions}
+                                className={props}
+                            />
                         </div>
                         <div className="mt-8 p-4 bg-white shadow-sm sm:rounded-lg w-1/2">
                             <AddedDeviceChart />
